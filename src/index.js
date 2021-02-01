@@ -12,7 +12,7 @@ app.use(router.routes())
 exports.start = async function() {
     try {
         this.server = await app.listen(PORT)
-        console.log('Listening to PORT 3000')
+        console.log(`Listening to PORT ${PORT}`)
     } catch (error) {
         console.log(error)
     }
