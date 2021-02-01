@@ -25,9 +25,11 @@
   },
   "homepage": "https://github.com/troncosoae/slistr#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "koa": "^2.13.1",
     "koa-response-time": "^2.1.0",
     "koa-router": "^10.0.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "pg": "^8.5.1"
   }
 }
