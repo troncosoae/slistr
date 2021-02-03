@@ -3,6 +3,7 @@
     <thead>
         <tr>
             <th scope="col">lid</th>
+            <th scope="col">name</th>
             <th scope="col">insterted_at</th>
             <th scope="col">updated_at</th>
         </tr>
@@ -11,9 +12,14 @@
     <% lists.forEach(list => { %>
         <tr>
             <td><%- list.lid %></td>
+            <td><%- list.name %></td>
             <td><%- list.inserted_at %></td>
             <td><%- list.updated_at %></td>
         </tr>
     <% }) %>
     </tbody>
 </table>
+<form action="/lists/create" method="POST">
+    <input type="text" name="name">
+    <input type="submit" value="Submit">
+</form>
