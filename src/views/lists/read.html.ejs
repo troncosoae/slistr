@@ -1,0 +1,19 @@
+<h1>Lists</h1>
+<table>
+    <thead>
+        <tr>
+            <th scope="col">lid</th>
+            <th scope="col">insterted_at</th>
+            <th scope="col">updated_at</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% lists.forEach(list => { %>
+        <tr>
+            <td><%- list.lid %></td>
+            <td><%- list.inserted_at %></td>
+            <td><%- list.updated_at %></td>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>

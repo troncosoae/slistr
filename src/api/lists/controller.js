@@ -5,3 +5,8 @@ exports.create = async function() {
     const list = await List.getById(lid)
     return list
 }
+
+exports.readAll = async function() {
+    const result = await List.getAll()
+    return result.rows
+}

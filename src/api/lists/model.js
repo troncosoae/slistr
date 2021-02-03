@@ -11,6 +11,13 @@ exports.create = async function () {
     )
 }
 
+exports.getAll = async function () {
+    return db.query(
+        'SELECT * FROM Lists',
+        []
+    )
+}
+
 exports.getById = async function (lid) {
     return db.queryOne(
         `
