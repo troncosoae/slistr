@@ -21,6 +21,14 @@ router.get('/update', async ctx => {
     })
 })
 
+router.get('/delete', async ctx => {
+    const lists = await controller.readAll()
+    await ctx.render('lists/delete.html.ejs', {
+        lists: lists
+    })
+})
+
+
 router.post('/create', async ctx => {
     console.log(ctx.request.body)
     const params = ctx.request.body
@@ -36,5 +44,13 @@ router.post('/update', async ctx => {
     console.log('updated:', result)
     ctx.redirect('/lists')
 })
+
+router.post('/delete', async ctx => {
+    console.log(ctx.request.body)
+    const params = ctx.request.body
+    await controller.delete(params)
+    ctx.redirect('/lists')
+})
+
 
 module.exports = router

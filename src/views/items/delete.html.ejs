@@ -1,0 +1,8 @@
+<form action="/items/delete" method="POST">
+    <select name="iid">
+    <% items.forEach(item => { %>
+        <option value="<%- item.iid %>"><%- item.iid %>:<%- item.name %> </option>
+    <% }) %>
+    </select>
+    <input type="submit" value="Delete">
+</form>

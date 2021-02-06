@@ -1,0 +1,11 @@
+<form action="/items/create" method="POST">
+    <input type="text" name="name">
+    <select name="lid">
+    <% lists.forEach(list => { %>
+        <option value="<%- list.lid %>"><%- list.lid %>:<%- list.name %> </option>
+    <% }) %>
+    </select>
+    <input type="checkbox" name="checkbox">
+    <input type="text" name="usr">
+    <input type="submit" value="Submit">
+</form>

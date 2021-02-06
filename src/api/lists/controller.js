@@ -13,6 +13,10 @@ exports.update = async function(params) {
     return list
 }
 
+exports.delete = async function(params) {
+    const returned = await List.delete(params)
+}
+
 exports.readAll = async function() {
     const result = await List.getAll()
     return result.rows

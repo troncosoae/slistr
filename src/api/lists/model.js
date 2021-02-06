@@ -25,6 +25,17 @@ exports.update = async function (params) {
     )
 }
 
+exports.delete = async function (params) {
+    console.log(params)
+    return db.queryOne(
+        `
+        DELETE FROM Lists 
+        WHERE lid = $1
+        `,
+        [params.lid]
+    )
+}
+
 exports.getAll = async function () {
     return db.query(
         'SELECT * FROM Lists',

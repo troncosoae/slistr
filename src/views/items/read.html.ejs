@@ -1,0 +1,27 @@
+<h1>Items</h1>
+<table>
+    <thead>
+        <tr>
+            <th scope="col">iid</th>
+            <th scope="col">name</th>
+            <th scope="col">lid</th>
+            <th scope="col">checked</th>
+            <th scope="col">usr</th>
+            <th scope="col">insterted_at</th>
+            <th scope="col">updated_at</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% items.forEach(item => { %>
+        <tr>
+            <td><%- item.iid %></td>
+            <td><%- item.name %></td>
+            <td><%- item.lid %></td>
+            <td><%- item.checked %></td>
+            <td><%- item.usr %></td>
+            <td><%- item.inserted_at %></td>
+            <td><%- item.updated_at %></td>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>

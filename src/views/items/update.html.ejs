@@ -1,0 +1,16 @@
+<form action="/items/update" method="POST">
+    <select name="iid">
+    <% items.forEach(item => { %>
+        <option value="<%- item.iid %>"><%- item.iid %>:<%- item.name %> </option>
+    <% }) %>
+    </select>
+    <input type="text" name="name">
+    <select name="lid">
+    <% lists.forEach(list => { %>
+        <option value="<%- list.lid %>"><%- list.lid %>:<%- list.name %> </option>
+    <% }) %>
+    </select>
+    <input type="checkbox" name="checkbox">
+    <input type="text" name="usr">
+    <input type="submit" value="Submit">
+</form>
