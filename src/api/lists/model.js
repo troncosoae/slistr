@@ -52,3 +52,13 @@ exports.getById = async function (lid) {
         [lid]
     )
 }
+
+exports.getItems = async function (lid) {
+    return db.query(
+        `
+        SELECT * FROM Items
+        WHERE lid = $1
+        `,
+        [lid]
+    )
+}

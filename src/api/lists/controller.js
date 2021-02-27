@@ -21,3 +21,14 @@ exports.readAll = async function() {
     const result = await List.getAll()
     return result.rows
 }
+
+exports.getById = async function(lid) {
+    const result = await List.getById(lid)
+    console.log(result)
+    return result
+}
+
+exports.getItems = async function(lid) {
+    const result = await List.getItems(lid)
+    return result.rows
+}
