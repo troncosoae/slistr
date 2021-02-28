@@ -73,4 +73,27 @@ router.post('/addItem', async ctx => {
     ctx.redirect(`/list/${params.lid}/${params.usr}`)
 })
 
+router.post('/changeItemStatus', async ctx => {
+    console.log('changeItemStatus', ctx.request.body)
+    const params = {
+        iid: ctx.request.body.iid,
+        name: ctx.request.body.name,
+        lid: ctx.request.body.lid,
+        usr: ctx.request.body.usr,
+        quantity: parseInt(ctx.request.body.quantity),
+        checked: ctx.request.body.status
+    }
+    const item = await itemsController.update(params)
+    ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}`)
+})
+
+router.post('/deleteItem', async ctx => {
+    console.log('changeItemStatus', ctx.request.body)
+    const params = {
+        iid: ctx.request.body.iid,
+    }
+    const item = await itemsController.delete(params)
+    ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}`)
+})
+
 module.exports = router

@@ -1,69 +1,65 @@
 <% include partials/navbar.html.ejs %>
-<!-- <h1><%- list.name %></h1>
-<h2><%- usr %></h2>
-<table>
-    <thead>
-        <tr>
-            <th scope="col">iid</th>
-            <th scope="col">name</th>
-            <th scope="col">lid</th>
-            <th scope="col">checked</th>
-            <th scope="col">usr</th>
-            <th scope="col">insterted_at</th>
-            <th scope="col">updated_at</th>
-        </tr>
-    </thead>
-    <tbody>
-    <% items.forEach(item => { %>
-        <tr>
-            <td><%- item.iid %></td>
-            <td><%- item.name %></td>
-            <td><%- item.lid %></td>
-            <td><%- item.checked %></td>
-            <td><%- item.usr %></td>
-            <td><%- item.inserted_at %></td>
-            <td><%- item.updated_at %></td>
-        </tr>
-    <% }) %>
-    </tbody>
-</table> -->
 
 <% include partials/new_item_form.html.ejs %>
 
 <div class="container-fluid" style="min-height: 100vh;">
     <br>
-    <form action="/sendChecked" method="POST">
-        <table class="table">
-            <thead>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Status</th>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+            
+        <% let i = 0 %>
+        <% items.sort((item1, item2) => {
+            return item1.inserted_at - item2.inserted_at
+        }) %> 
+        <% items.forEach(item => { %>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Status</th>
-                <th scope="col">Name</th>
-                <th scope="col">Quantity</th>
-            </tr>
-            </thead>
-            <tbody>
-                
-            <% let i = 0 %>
-            <% items.forEach(item => { %>
-                <tr>
-                    <th scope="row"><%- i + 1 %></th>
+                <th scope="row"><%- i + 1 %></th>
+                <form action="/changeItemStatus" method="POST">
+                    <input type="hidden" name="quantity" value="<%- item.quantity %>">
+                    <input type="hidden" name="name" value="<%- item.name %>">
+                    <input type="hidden" name="iid" value="<%- item.iid %>">
+                    <input type="hidden" name="lid" value="<%- lid %>">
+                    <input type="hidden" name="usr" value="<%- usr %>">
                     <% if (item.checked) { %>
-                        <td><input type="checkbox" name="<%- i._id %>" checked></td>
+                        <td>
+                            <input type="hidden" name="status" value="false">
+                            <button type="submit" class="btn btn-primary" style="background-color: var(--middle-color); border-color: var(--middle-color); width: 70px;">
+                                Done
+                            </button>
+                        </td>
                     <% } else { %>
-                        <td><input type="checkbox" name="<%- i._id %>"></td>
+                        <td>
+                            <input type="hidden" name="status" value="true">
+                            <button type="submit" class="btn btn-primary" style="background-color: var(--main-color); border-color: var(--main-color); width: 70px;">
+                                Not 
+                            </button>
+                        </td>
                     <% } %>
-                    <td><%- item.name %></td>
-                    <td><%- item.quantity %></td>
-                </tr>
-                <% i = i + 1 %>
-            <% }) %>
-            </tbody>
-        </table>
-        <button type="submit" class="btn btn-primary" style="background-color: var(--main-color); border-color: var(--main-color);">
-            Update
-        </button>
-    </form>
+                </form>
+                <td><%- item.name %></td>
+                <td><%- item.quantity %></td>
+                <form action="/deleteItem" method="POST">
+                    <input type="hidden" name="iid" value="<%- item.iid %>">
+                    <input type="hidden" name="lid" value="<%- lid %>">
+                    <input type="hidden" name="usr" value="<%- usr %>">
+                    <td><button type="submit" class="btn btn-primary" style="background-color: var(--main-color); border-color: var(--main-color);">
+                        - 
+                    </button></td>
+                </form>
+            </tr>
+            <% i = i + 1 %>
+        <% }) %>
+        </tbody>
+    </table>
 </div>
 
 <% include partials/footer.html.ejs %>
