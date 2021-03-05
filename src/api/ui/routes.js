@@ -47,6 +47,35 @@ router.get('/list/:lid/:usr', async ctx => {
     }
 })
 
+router.get('/list/:lid', async ctx => {
+    console.log(ctx.params)
+    const lid = ctx.params.lid
+    console.log(lid)
+    if (!isValidUuid(lid)) {
+        await ctx.render('ui/error.html.ejs', {
+            backRoute: '/',
+            title: 'List not found',
+            message: `The list key ${lid} is invalid.`
+        })
+    } else {
+        const list = await listsController.getById(lid)
+        const items = await listsController.getItems(lid)
+        console.log(list)
+        console.log(items)
+        if (list === undefined) {
+            await ctx.render('ui/error.html.ejs', {
+                backRoute: '/',
+                title: 'List not found',
+                message: `The list for key ${lid} has not been found.`
+            })
+        } else {
+            await ctx.render('ui/enter_user.html.ejs', {
+                lid: list.lid,
+            })
+        }
+    }
+})
+
 router.post('/getNewList', async ctx => {
     console.log(ctx.request.body)
     const usr = ctx.request.body.usr
@@ -56,6 +85,11 @@ router.post('/getNewList', async ctx => {
 })
 
 router.post('/getList', async ctx => {
+    console.log(ctx.request.body)
+    ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}`)
+})
+
+router.post('/getListAddUser', async ctx => {
     console.log(ctx.request.body)
     ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}`)
 })

@@ -2,16 +2,23 @@
 
 <% include partials/new_item_form.html.ejs %>
 
+<style>
+    #itemsTable td, th {
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+
 <div class="container-fluid" style="min-height: 100vh;">
     <br>
-    <table class="table">
+    <table class="table" id="itemsTable">
         <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Status</th>
             <th scope="col">Name</th>
-            <th scope="col">Quantity</th>
-            <th scope="col"></th>
+            <th scope="col">Quant</th>
+            <th scope="col">Del</th>
         </tr>
         </thead>
         <tbody>
