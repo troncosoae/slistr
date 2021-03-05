@@ -1,19 +1,44 @@
-<div class="container-fluid" style="background-color:var(--dark-color); padding: 5px; padding-right: 15px; padding-left: 15px;">
-    <form action="/addItem" method="POST">
+<style>
+    #total-container {
+        background-color:var(--dark-color);
+        padding: 5px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    #add-button {
+        background-color: var(--main-color);
+        border-color: var(--main-color);
+        display: block;
+        margin: 10px 0;
+        padding: 10px;
+        width: 100%;
+    }
+</style>
+<div id="total-container">
+    <form action="/addItem" method="POST" id="newItemForm">
         <div class="form-row">
             <input type="hidden" name="lid" value="<%- lid %>">
             <input type="hidden" name="usr" value="<%- usr %>">
             <div class="col">
-                <input type="text" class="form-control" placeholder="Name..." name="name">
+                <input type="text" class="form-control" placeholder="Name..." name="name" id="nameInput">
             </div>
             <div class="col col-sm-2">
                 <input type="number" class="form-control" placeholder="0" name="quantity">
             </div>
-            <button type="submit" class="btn btn-primary" style="background-color: var(--main-color); border-color: var(--main-color)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                </svg>
-            </button>
         </div>
     </form>
+    <button onclick="onPressPlus()" class="btn btn-primary" id="add-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+    </button>
 </div>
+<script>
+function onPressPlus() {
+    if (document.getElementById("nameInput").value === "") {
+        alert("Enter item name!")
+    } else {
+        document.getElementById("newItemForm").submit()
+    }
+}
+</script>
