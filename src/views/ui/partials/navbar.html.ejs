@@ -1,14 +1,30 @@
 <div class="navbar fixed-top d-flex justify-content-between" style="background-color:var(--dark-color); color: white">
-    <a href="/#" style="color: currentColor;">
-      <div class="p-2 bd-highlight d-flex" style="align-items: center;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
-          <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"></path>
-        </svg>
-        <br>
-        <div>Slistr</div>
-      </div>
-    </a>
-  </div>
-  <div class="navbar navbar-light bg-light d-flex justify-content-between" style="opacity: 0%;">
-    <div class="p-2 bd-highlight">div for height</div>
-  </div>
+  <a href="/#" style="color: currentColor;">
+    <div class="p-2 bd-highlight d-flex" style="align-items: center;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"></path>
+      </svg>
+      <br>
+      <div>Slistr</div>
+    </div>
+  </a>
+  <button onclick="triggerMenu()" class="btn btn-primary" style="background-color: transparent; border-color: transparent; color: white; width: 40px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share-fill" viewBox="0 0 16 16">
+      <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+    </svg>
+  </button>
+</div>
+<div class="navbar navbar-light bg-light d-flex justify-content-between" style="opacity: 0;">
+  <div class="p-2 bd-highlight">div for height</div>
+</div>
+<script>
+  function triggerMenu() {
+    if (document.getElementById("share_overlay").style.zIndex == -1) {
+      document.getElementById("share_overlay").style.zIndex = 1
+      document.getElementById("showListContainer").style.opacity = 0.5
+    } else {
+      document.getElementById("share_overlay").style.zIndex = -1
+      document.getElementById("showListContainer").style.opacity = 1
+    }
+  }
+</script>
