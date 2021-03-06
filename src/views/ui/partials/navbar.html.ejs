@@ -19,7 +19,7 @@
 </div>
 <script>
   function triggerMenu() {
-    if (document.getElementById("share_overlay").style.zIndex == -1) {
+    if (document.getElementById("showListContainer").style.opacity > 0.5) {
       document.getElementById("share_overlay").style.zIndex = 1
       document.getElementById("showListContainer").style.opacity = 0.5
     } else {
