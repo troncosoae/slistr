@@ -33,6 +33,9 @@
         right: 10px;
         top: 5px;
     }
+    #listLink {
+        word-break: break-all;
+    }
 </style>
 
 <div class="box stack-top" id="share_overlay">
@@ -40,9 +43,9 @@
         <h2>Share this list!</h2>
         <div class="copy-box">
             <br>
-            <p id="copyShare" style="font-size: 12px;">
+            <p id="copyShare">
                 I created a list at Slistr! Go to the following link to contribute: 
-                <u style="color: blue;">https://slistr.herokuapp.com/list/<%- lid %></u>
+                <u style="color: blue;" id="listLink">https://slistr.herokuapp.com/list/<%- lid %></u>
             </p>
             <button onclick="clickCopy('copyShare')" class="btn btn-primary copy-icon" style="background-color: rgba(255, 255, 255, 0.8); border-color: transparent; color: black; width: 40px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
