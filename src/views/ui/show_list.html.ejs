@@ -20,14 +20,15 @@
     </style>
 
     <% include partials/new_item_form.html.ejs %>
-    
-    <form action="/changeOrder" method="POST">
+
+    <% orderKey = orderKey ? orderKey : 'date' %>
+    <form action="/list/<%- lid %>/<%- usr %>" method="GET" id="orderSelect">
         <div id="orderByDiv">
             <div style="align-self: flex-end; display: flex; flex-direction: row; align-items: center">
                 <label class="form-label" style="margin: 10px; width: 130px; align-items: center">Sorted By:</label>
-                <select class="form-control" id="orderSelect" onchange="onChangeOrder()">
-                    <option value="name" selected>Name</option>
-                    <option value="date">Date</option>
+                <select name="orderKey" class="form-control" onchange="onChangeOrder()">
+                    <%- orderKey === 'date' ? '<option value="date" selected>Date</option>' : '<option value="date">Date</option>' %>
+                    <%- orderKey === 'name' ? '<option value="name" selected>Name</option>' : '<option value="name">Name</option>' %>
                 </select>
             </div>
         </div>          
@@ -36,7 +37,7 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
         function onChangeOrder() {
-            location.reload();
+            document.getElementById("orderSelect").submit()
         }
     </script>
 
@@ -61,9 +62,6 @@
                 </thead>
                 <tbody>
                 <% let i = 0 %>
-                <% items.sort((item1, item2) => {
-                    return item1.inserted_at - item2.inserted_at
-                }) %> 
                 <% items.forEach(item => { %>
                     <tr>
                         <th><%- i + 1 %></th>
@@ -74,6 +72,7 @@
                             <input type="hidden" name="lid" value="<%- lid %>">
                             <input type="hidden" name="usr" value="<%- usr %>">
                             <input type="hidden" name="unit" value="<%- item.unit %>">
+                            <input type="hidden" name="orderKey" value="<%- orderKey %>">
                             <% if (item.checked) { %>
                                 <td>
                                     <input type="hidden" name="status" value="false">
@@ -100,6 +99,7 @@
                             <input type="hidden" name="iid" value="<%- item.iid %>">
                             <input type="hidden" name="lid" value="<%- lid %>">
                             <input type="hidden" name="usr" value="<%- usr %>">
+                            <input type="hidden" name="orderKey" value="<%- orderKey %>">
                             <td>
                                 <button type="submit" class="btn btn-primary" style="background-color: white; border-color: white; color: var(--main-color)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">

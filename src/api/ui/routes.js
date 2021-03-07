@@ -15,6 +15,8 @@ router.get('/newList', async ctx => {
 
 router.get('/list/:lid/:usr', async ctx => {
     console.log(ctx.params)
+    console.log(ctx.request.query)
+    const orderKey = ctx.request.query.orderKey
     const usr = ctx.params.usr
     const lid = ctx.params.lid
     console.log(lid)
@@ -37,11 +39,27 @@ router.get('/list/:lid/:usr', async ctx => {
                 message: `The list for key ${lid} has not been found.`
             })
         } else {
+            if (orderKey === 'name') {
+                items.sort((item1, item2) => {
+                    if(item1.name < item2.name) { return -1; }
+                    if(item1.name > item2.name) { return 1; }
+                    return 0;
+                })
+            } else if (orderKey === 'date') {
+                items.sort((item1, item2) => {
+                    return item1.inserted_at - item2.inserted_at
+                })
+            } else {
+                items.sort((item1, item2) => {
+                    return item1.inserted_at - item2.inserted_at
+                })
+            }
             await ctx.render('ui/show_list.html.ejs', {
                 usr: usr,
                 list: list,
                 lid: list.lid, 
                 items: items,
+                orderKey: orderKey,
             })
         }
     }
@@ -120,7 +138,7 @@ router.post('/changeItemStatus', async ctx => {
         unit: ctx.request.body.unit
     }
     const item = await itemsController.update(params)
-    ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}`)
+    ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}?orderKey=${ctx.request.body.orderKey}`)
 })
 
 router.post('/deleteItem', async ctx => {
@@ -129,15 +147,7 @@ router.post('/deleteItem', async ctx => {
         iid: ctx.request.body.iid,
     }
     const item = await itemsController.delete(params)
-    ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}`)
-})
-
-router.post('/changeOrder', async ctx => {
-    console.log('changeOrder', ctx.request.body)
-    const params = {
-        // iid: ctx.request.body.iid,
-    }
-    ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}`)
+    ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}?orderKey=${ctx.request.body.orderKey}`)
 })
 
 module.exports = router
