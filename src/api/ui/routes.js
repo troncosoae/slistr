@@ -123,7 +123,7 @@ router.post('/addItem', async ctx => {
         unit: ctx.request.body.unit,
     }
     const item = await itemsController.create(params)
-    ctx.redirect(`/list/${params.lid}/${params.usr}`)
+    ctx.redirect(`/list/${params.lid}/${params.usr}?orderKey=${ctx.request.body.orderKey}`)
 })
 
 router.post('/changeItemStatus', async ctx => {
