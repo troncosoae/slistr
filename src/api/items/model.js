@@ -5,10 +5,10 @@ exports.create = async function (params) {
     const now = new Date()
     return db.queryOne(
         `
-        INSERT INTO Items (inserted_at, updated_at, name, lid, checked, quantity, usr) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *
+        INSERT INTO Items (inserted_at, updated_at, name, lid, checked, quantity, usr, unit) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *
         `,
-        [now, now, params.name, params.lid, params.checked, params.quantity, params.usr]
+        [now, now, params.name, params.lid, params.checked, parseFloat(params.quantity), params.usr, params.unit]
     )
 }
 
@@ -23,10 +23,11 @@ exports.update = async function (params) {
         lid = $3,
         checked = $4,
         quantity = $5,
-        usr = $6
-        WHERE iid = $7
+        usr = $6,
+        unit = $7
+        WHERE iid = $8
         `,
-        [now, params.name, params.lid, params.checked, parseInt(params.quantity), params.usr, params.iid]
+        [now, params.name, params.lid, params.checked, parseFloat(params.quantity), params.usr, params.unit, params.iid]
     )
 }
 

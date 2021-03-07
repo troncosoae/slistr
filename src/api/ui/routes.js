@@ -100,8 +100,9 @@ router.post('/addItem', async ctx => {
         name: ctx.request.body.name,
         lid: ctx.request.body.lid,
         checked: false,
-        quantity: parseInt(ctx.request.body.quantity),
+        quantity: parseFloat(ctx.request.body.quantity),
         usr: ctx.request.body.usr,
+        unit: ctx.request.body.unit,
     }
     const item = await itemsController.create(params)
     ctx.redirect(`/list/${params.lid}/${params.usr}`)
@@ -115,7 +116,8 @@ router.post('/changeItemStatus', async ctx => {
         lid: ctx.request.body.lid,
         usr: ctx.request.body.usr,
         quantity: parseInt(ctx.request.body.quantity),
-        checked: ctx.request.body.status
+        checked: ctx.request.body.status,
+        unit: ctx.request.body.unit
     }
     const item = await itemsController.update(params)
     ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}`)
@@ -127,6 +129,14 @@ router.post('/deleteItem', async ctx => {
         iid: ctx.request.body.iid,
     }
     const item = await itemsController.delete(params)
+    ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}`)
+})
+
+router.post('/changeOrder', async ctx => {
+    console.log('changeOrder', ctx.request.body)
+    const params = {
+        // iid: ctx.request.body.iid,
+    }
     ctx.redirect(`/list/${ctx.request.body.lid}/${ctx.request.body.usr}`)
 })
 

@@ -4,6 +4,8 @@
         padding: 5px;
         padding-right: 15px;
         padding-left: 15px;
+        position: sticky;
+        top: 55px;
     }
     #add-button {
         background-color: var(--main-color);
@@ -19,11 +21,30 @@
         <div class="form-row">
             <input type="hidden" name="lid" value="<%- lid %>">
             <input type="hidden" name="usr" value="<%- usr %>">
-            <div class="col">
+            <div class="col-6">
                 <input type="text" class="form-control" placeholder="Name..." name="name" id="nameInput">
             </div>
-            <div class="col col-sm-2">
-                <input type="number" class="form-control" value="0" name="quantity">
+            <div class="col-3">
+                <input type="number" class="form-control" value="0" name="quantity" id="quantInput">
+            </div>
+            <div class="col-3">
+                <select class="form-control" name="unit">
+                  <option value="units" selected>units</option>
+                  <option value="cc">cc</option>
+                  <option value="cm">cm</option>
+                  <option value="cups">cups</option>
+                  <option value="dozens">dozens</option>
+                  <option value="ft">ft</option>
+                  <option value="g">g</option>
+                  <option value="in">in</option>
+                  <option value="kg">kg</option>
+                  <option value="L">L</option>
+                  <option value="m">m</option>
+                  <option value="mL">mL</option>
+                  <option value="mm">mm</option>
+                  <option value="teaspoons">teaspoons</option>
+                  <option value="tablespoons">tablespoons</option>
+                </select>
             </div>
         </div>
     </form>
@@ -34,11 +55,20 @@
     </button>
 </div>
 <script>
-function onPressPlus() {
-    if (document.getElementById("nameInput").value === "") {
-        alert("Enter item name!")
-    } else {
-        document.getElementById("newItemForm").submit()
+    function onPressPlus() {
+        let nameInput = document.getElementById("nameInput").value
+        let quantInput = document.getElementById("quantInput").value
+        if (nameInput === "") {
+            alert("Enter item name!")
+        } else if (isNaN(quantInput) || quantInput === "") {
+            alert("Enter valid number!")
+        } else {
+            let itemNames = eval("[<%- items.map(item => `'${item.name}'`) %>]")
+            if (itemNames.includes(nameInput)) {
+                alert('this name already in list')
+            } else {
+                document.getElementById("newItemForm").submit()
+            }
+        }
     }
-}
 </script>
